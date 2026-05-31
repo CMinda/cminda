@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carlos Minda — Cybersecurity Engineer</title>
+  <meta name="description" content="Senior cybersecurity & cloud infrastructure engineer. Forensics, SIEM, VoIP security, reverse engineering." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #c0392b;
+      --red-dim: #7b241c;
+      --red-glow: rgba(192, 57, 43, 0.15);
+      --bg: #080808;
+      --bg-card: #0d0d0d;
+      --bg-card-hover: #120808;
+      --border: #1e1e1e;
+      --border-hover: #c0392b;
+      --text-primary: #e0e0e0;
+      --text-secondary: #888;
+      --text-muted: #444;
+      --mono: 'Share Tech Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(192,57,43,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(192,57,43,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--red);
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 5rem 0 4rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .avatar-wrap {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--red);
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .avatar-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 0.5px solid var(--red-dim);
+      opacity: 0.5;
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+    .avatar-ring2 {
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      border: 0.5px solid var(--red-dim);
+      opacity: 0.25;
+      animation: pulse-ring 3s ease-in-out infinite 0.5s;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.04); opacity: 0.1; }
+    }
+
+    .hero-name {
+      font-family: var(--mono);
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.4rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero-bio {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 580px;
+      line-height: 1.85;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+    .hero-bio strong { color: var(--red); font-weight: 400; }
+
+    .hero-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 18px;
+      border: 0.5px solid #2a2a2a;
+      border-radius: 4px;
+      color: var(--red);
+      text-decoration: none;
+      background: transparent;
+      letter-spacing: 0.05em;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+    .btn:hover { border-color: var(--red); background: var(--red-glow); }
+    .btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 3rem 0 0;
+      width: 100%;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+    .stat {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 22px;
+      color: var(--red);
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--red);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 3rem 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--border);
+    }
+
+    /* ── REPOS ── */
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .repo-card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.15s, background 0.15s, transform 0.15s;
+    }
+    .repo-card:hover {
+      border-color: var(--red);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+    .repo-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.5rem;
+    }
+    .repo-icon {
+      width: 16px;
+      height: 16px;
+      fill: var(--red);
+      flex-shrink: 0;
+    }
+    .repo-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #ccc;
+    }
+    .repo-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .repo-tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 3px;
+      background: #1a0808;
+      color: #e74c3c;
+      border: 0.5px solid var(--red-dim);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── MEDIUM ── */
+    .medium-card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s, transform 0.15s;
+    }
+    .medium-card:hover {
+      border-color: var(--red);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+    .medium-left { display: flex; align-items: center; gap: 14px; }
+    .medium-ico { width: 24px; height: 24px; fill: var(--red); flex-shrink: 0; }
+    .medium-title { font-size: 14px; color: #ccc; font-weight: 500; }
+    .medium-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .arrow { width: 16px; height: 16px; fill: #333; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 3rem 0 2rem;
+      letter-spacing: 0.06em;
+      border-top: 0.5px solid var(--border);
+      margin-top: 4rem;
+    }
+    footer span { color: var(--red); }
+    .blink { animation: blink 1.2s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .hero-name { font-size: 24px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">~/cminda</span>
+    <ul class="nav-links">
+      <li><a href="#repos">repos</a></li>
+      <li><a href="#writing">writing</a></li>
+      <li><a href="mailto:carlos.mindag@email.com">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="avatar-wrap">
+      <div class="avatar-ring2"></div>
+      <div class="avatar-ring"></div>
+      <div class="avatar">
+        <!-- Replace src with your logo image path in your repo -->
+        <img src="logo.png" alt="CMinda logo" />
+      </div>
+    </div>
+
+    <h1 class="hero-name">Carlos Minda</h1>
+    <p class="hero-tag">// cybersecurity · cloud infrastructure · digital forensics</p>
+
+    <p class="hero-bio">
+      Senior engineer with <strong>10+ years</strong> across cloud infrastructure and cybersecurity.
+      Currently providing <strong>Tier 2 VoIP &amp; cloud support</strong> at Sangoma — specializing in
+      packet-level analysis, TLS/SSL troubleshooting, Linux log forensics, and IAM.
+      Former infrastructure engineer at Dátil, where I architected <strong>AWS environments</strong>,
+      designed <strong>PCI-DSS compliant</strong> systems, and built CI/CD pipelines.
+      <strong>Master's in Cybersecurity (Cum Laude)</strong> · ISO/IEC 27001:2022 Lead Auditor ·
+      Open to US remote roles.
+    </p>
+
+    <div class="hero-links">
+      <a class="btn" href="https://github.com/CMinda" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+        GitHub
+      </a>
+      <a class="btn" href="https://medium.com/@CMinda" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+        Medium
+      </a>
+      <a class="btn" href="mailto:carlos.mindag@email.com">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email
+      </a>
+      <a class="btn" href="https://www.linkedin.com/in/cminda" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">years experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">80%+</div>
+        <div class="stat-label">first-contact resolution</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">daily cases handled</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Top 5</div>
+        <div class="stat-label">CSAT 2024–2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPOS -->
+  <section id="repos">
+    <div class="section-label">repositories</div>
+    <div class="repo-grid">
+
+      <a class="repo-card" href="https://github.com/CMinda/ram-forensics-volatility" target="_blank" rel="noopener">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V9h8v2zm0-4H8V5h8v2z"/></svg>
+          <span class="repo-name">ram-forensics-volatility</span>
+        </div>
+        <p class="repo-desc">Memory forensics analysis using the Volatility framework to investigate RAM artifacts.</p>
+        <span class="repo-tag">forensics</span>
+      </a>
+
+      <a class="repo-card" href="https://github.com/CMinda/SIEM-Monitoring-Graylog" target="_blank" rel="noopener">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          <span class="repo-name">siem-monitoring-graylog</span>
+        </div>
+        <p class="repo-desc">Security event monitoring and alerting setup using Graylog SIEM platform.</p>
+        <span class="repo-tag">siem · monitoring</span>
+      </a>
+
+      <a class="repo-card" href="https://github.com/CMinda/Mobile_App_Audit" target="_blank" rel="noopener">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+          <span class="repo-name">mobile-app-audit</span>
+        </div>
+        <p class="repo-desc">Security audit methodology and findings for mobile applications.</p>
+        <span class="repo-tag">mobile · pentest</span>
+      </a>
+
+      <a class="repo-card" href="https://github.com/CMinda/tweets_sentiment" target="_blank" rel="noopener">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          <span class="repo-name">tweets-sentiment</span>
+        </div>
+        <p class="repo-desc">NLP-based sentiment analysis pipeline applied to Twitter/X data streams.</p>
+        <span class="repo-tag">nlp · data science</span>
+      </a>
+
+      <a class="repo-card" href="https://github.com/CMinda/reverse_engineer" target="_blank" rel="noopener">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+          <span class="repo-name">reverse-engineer</span>
+        </div>
+        <p class="repo-desc">Reverse engineering notes, scripts, and binary analysis exercises.</p>
+        <span class="repo-tag">re · malware</span>
+      </a>
+
+      <a class="repo-card" href="https://github.com/CMinda/acrobits_log_parser" target="_blank" rel="noopener">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span class="repo-name">acrobits-log-parser</span>
+        </div>
+        <p class="repo-desc">Log parsing utility for Acrobits VoIP application data investigation.</p>
+        <span class="repo-tag">parser · logs</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="section-label">writing</div>
+    <a class="medium-card" href="https://medium.com/@CMinda" target="_blank" rel="noopener">
+      <div class="medium-left">
+        <svg class="medium-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+        <div>
+          <div class="medium-title">Medium — @CMinda</div>
+          <div class="medium-sub">Articles on security, forensics &amp; data analysis</div>
+        </div>
+      </div>
+      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    Carlos Minda · Guayaquil, Ecuador · Open to US Remote <span class="blink">▮</span>
+  </footer>
+
+</div>
+</body>
+</html>
